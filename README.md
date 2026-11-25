@@ -11,10 +11,12 @@ A tiny Node.js demo: one page with a box where you ask a question, and Claude an
 5. Run `npx pm2 start ecosystem.config.cjs`.
 6. Run `npx pm2 save`.
 
+The included `.htaccess` sends every visit to `proxy.php`, which passes it to the app on port 3000. It works on Cloudways servers where Apache has no proxy module (a plain `[P]` proxy rule gives error 500 there).
+
 Keep the app alive after a server reboot with this line in the app's Advanced cron:
 
 ```
-@reboot cd /home/master/applications/<app-folder>/public_html && npx pm2 resurrect
+@reboot cd /home/<server-id>.cloudwaysapps.com/<app-folder>/public_html && PM2_HOME=/home/master/.pm2 npx pm2 resurrect
 ```
 
 Video: coming soon
